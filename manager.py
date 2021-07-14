@@ -14,4 +14,8 @@ except:
     sys.exit()
 
 os.system("touch cnf.txt")
+os.system("touch glucoseResult.txt")
+os.system("touch tounament.ics")
 os.system("python3 jsonToCNF.py %s >> cnf.txt" % fileName)
+os.system("./glucose-syrup-4.1/simp/glucose_static cnf.txt glucoseResult.txt")
+#os.system("python3 cnfToICS.py glucoseResult.txt >> tounament.ics")

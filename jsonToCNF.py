@@ -2,10 +2,10 @@ import sys
 import json
 from datetime import date, time
 
-def calcVar(day,hour,local,visitor):
-    if (visitor >= local):
-        visitor -= 1
-    return day*numOfHours*numOfParticipants*(numOfParticipants-1) + hour*numOfParticipants*(numOfParticipants-1) + local*(numOfParticipants-1) + visitor +1
+def calcVar(day,hour,home,away):
+    if (away >= home):
+        away -= 1
+    return day*numOfHours*numOfParticipants*(numOfParticipants-1) + hour*numOfParticipants*(numOfParticipants-1) + home*(numOfParticipants-1) + away +1
 
 with open(sys.argv[1], "r") as jsonFile:
     data = json.load(jsonFile)
@@ -104,5 +104,3 @@ for a in clausulas:
     cnfSAT += a
 
 print(cnfSAT)
-
-# data["participants"]
