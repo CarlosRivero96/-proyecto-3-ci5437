@@ -18,7 +18,7 @@ numOfDays = (end_date - start_date).days +1
 # calculate number of hours
 start_time = time.fromisoformat(data["start_time"])
 end_time = time.fromisoformat(data["end_time"])
-numOfHours = (end_time.hour - start_time.hour)//2
+numOfHours = (end_time.hour - start_time.hour - (start_time.minute != 0 or start_time.second != 0))//2
 
 numOfParticipants = len(data["participants"])
 
