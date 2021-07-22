@@ -1,7 +1,7 @@
 {
     "tournament_name": "Tournament test",
     "start_date": "2021-07-12",
-    "end_date": "2021-08-09",
+    "end_date": "2021-08-10",
     "start_time": "12:00:00",
     "end_time": "18:00:01",
     "participants": ["CabelloLargo", "Juancho", "Koz", "Amin", "Thomas", "ManolitoD", "D10$", "SV", "maryuwu", "skla"]

@@ -24,7 +24,7 @@ numOfParticipants = len(data["participants"])
 
 clausulas = set()
 
-# no hay 2 partidos al mismo tiempo
+# there is no two matches at the same time
 for i in range(numOfDays):
     for j in range(numOfHours):
         vars = []
@@ -37,9 +37,8 @@ for i in range(numOfDays):
         for a in range(len(vars)):
             for b in range(a+1,len(vars)):
                 clausulas.add("-%d -%d 0\n" % (vars[a],vars[b]))
-                # print("-%d -%d 0" % (vars[a],vars[b]))
 
-# un equipo no juega dos partidos como visitante/local 2 dias consecutivos
+# a team doesn't play two matches as local/away two days in a row
 for k in range(numOfParticipants):
     for i in range(numOfDays-1):
         dayL = []
@@ -58,13 +57,11 @@ for k in range(numOfParticipants):
         for a in dayL:
             for b in nextDayL:
                 clausulas.add("-%d -%d 0\n" % (min(a,b),max(a,b)))
-                # print("-%d -%d 0" % (a,b))
         for a in dayV:
             for b in nextDayV:
                 clausulas.add("-%d -%d 0\n" % (min(a,b),max(a,b)))
-                # print("-%d -%d 0" % (a,b))
 
-# un equipo juega a lo sumo una vez por dia
+# a team plays at most once per day
 for k in range(numOfParticipants):
     for i in range(numOfDays):
         games = []
@@ -79,9 +76,8 @@ for k in range(numOfParticipants):
         for a in range(len(games)):
             for b in range(a+1,len(games)):
                 clausulas.add("-%d -%d 0\n" % (games[a],games[b]))
-                # print("-%d -%d 0" % (games[a],games[b]))
 
-# un equipo debe jugar contra todos los demas equipos exactamente una vez de local y una de visitante
+# a team must play against every other team exactly once as local and once as away
 for k in range(numOfParticipants):
     for l in range(numOfParticipants):
         if (l==k):
@@ -91,16 +87,14 @@ for k in range(numOfParticipants):
             for j in range(numOfHours):
                 home.append(calcVar(i,j,k,l))
         home.sort()
-        # almenos uno
+        # at least one
         clausulas.add(" ".join(str(x) for x in home) + " 0\n")
-        # a lo sumo uno
+        # at most one
         for a in range(len(home)):
             for b in range(a+1,len(home)):
                 clausulas.add("-%d -%d 0\n" % (home[a],home[b]))
-                # print("-%s -%s 0" % (home[a],home[b]))
 
-cnfSAT = "p cnf %d %d\n" % (numOfDays*numOfHours*numOfParticipants*(numOfParticipants-1), len(clausulas))
+print("p cnf %d %d\n" % (numOfDays*numOfHours*numOfParticipants*(numOfParticipants-1), len(clausulas)))
+
 for a in clausulas:
-    cnfSAT += a
-
-print(cnfSAT)
+    print(a,end="")

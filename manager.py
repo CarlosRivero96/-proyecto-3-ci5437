@@ -15,8 +15,9 @@ except:
 
 os.system("touch cnf.txt")
 os.system("touch glucoseResult.txt")
-os.system("touch tournament.ics")
+print("generando representacion cnf")
 os.system(f'python3 jsonToCNF.py {fileName} > cnf.txt')
-os.system("./glucose-syrup-4.1/simp/glucose_static cnf.txt glucoseResult.txt > /dev/null")
+print("ejecutando glucose sobre cnf generado")
+os.system("./glucose-syrup-4.1/simp/glucose_static cnf.txt glucoseResult.txt")
 os.system(f'python3 cnfToICS.py {fileName}')
 os.system("rm glucoseResult.txt")

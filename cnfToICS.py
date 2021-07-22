@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 from datetime import date, timedelta, datetime
 from ics import Calendar, Event
@@ -68,7 +69,9 @@ def createEvent(event):
 c = Calendar()
 for e in events: c.events.add(createEvent(e))
 
-with open('tournament.ics', 'w') as my_file:
+os.system(f'touch {data["tournament_name"]}.ics')
+
+with open(f'{data["tournament_name"]}.ics', 'w') as my_file:
     my_file.writelines(c)
 
 print("SAT :D")
